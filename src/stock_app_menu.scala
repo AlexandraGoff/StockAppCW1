@@ -98,7 +98,7 @@ object HelloWorld extends App {
 
   getUsersChoice(mapdata)
 
-  // Let the user input their own portfolio.
+  // Let the user input their own portfolio and add shared held.
   def createPortfolio() = {
     var xy = SortedMap[String,Int]()
   }
