@@ -1,6 +1,7 @@
 package example
 
 import scala.collection.immutable.{ListMap, SortedMap}
+import scala.sys.SystemProperties.headless.key
 
 object HelloWorld extends App {
 
@@ -33,7 +34,7 @@ object HelloWorld extends App {
 
   def findMedian(lmap: Map[String, List[Int]]): Unit = {
     val mp = ListMap(lmap.toSeq.sortWith(_._1 < _._1): _*)
-    mp foreach {
+    mp foreach{
       case (key, value)
       => println(key + " => " + value.sorted.drop(value.length / 2).head)
         if (value.sorted.size % 2 == 0) {
@@ -96,11 +97,21 @@ object HelloWorld extends App {
     return average
   }
 
-  getUsersChoice(mapdata)
-
   // Let the user input their own portfolio and add shared held.
   def createPortfolio() = {
     var xy = SortedMap[String,Int]()
+    println("Enter the stock symbol :")
+    val stockName = scala.io.StdIn.readLine().toUpperCase()
+    println("Enter the number of shares : ")
+    val shares = scala.io.StdIn.readInt()
+    val valList = mapdata(stockName)
+    println(valList)
+    val currentValue = shares * valList.last
+    println(currentValue)
+    xy = SortedMap(stockName -> currentValue) ++ xy
+
   }
+
+  createPortfolio()
 
 }
